@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG Chatbot</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+        }
+        .chat-box {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .chat-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        .chat-box li {
+            padding: 8px 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+        .chat-box .user-message {
+            background-color: #d1ecf1;
+            text-align: right;
+            margin-left: auto;
+            max-width: 75%;
+        }
+        .chat-box .bot-message {
+            background-color: #e2e3e5;
+            text-align: left;
+            margin-right: auto;
+            max-width: 75%;
+
+        }
+        .input-group {
+            padding: 10px;
+            background: #ffffff;
+            border-top: 1px solid #dee2e6;
+        }
+        .input-group .form-control,
+        .input-group .btn {
+            border-radius: 0;
+        }
+        .custom-file-input::after {
+            content: attr(data-title);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="chat-box" id="chat-box">
+            {% if conversation %}
+                <ul>
+                    {% for message in chat_history %}
+                        {% if loop.index % 2 != 0 %}
+                            <li class="user-message">You: {{ message }}</li>
+                        {% else %}
+                            <li class="bot-message">ChatBot: {{ message}}</li>
+                {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+        <form action="/chat" method="post" enctype="multipart/form-data">
+            <div class="input-group" >
+                <input type="file" class="form-control" id="file_input" name="file_input">
+                <input type="text" class="form-control" id="message" name="message" placeholder="Type your message">
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </div>            
+        </form>
+    </div>  
+    
+    
+     
+</body>
+</html>

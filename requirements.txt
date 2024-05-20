@@ -1,0 +1,9 @@
+Flask
+requests
+python-dotenv
+OpenAI
+langchain
+bs4
+langchain_openai
+langchainhub
+chromadb
